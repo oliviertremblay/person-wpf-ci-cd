@@ -2,9 +2,9 @@ name: Intégration en continu de PersonWPF
 
 on:
   push:
-    branches: [ "demo-ci, main, master" ]
+    branches: [ demo-ci, main, master ]
   pull_request:
-    branches: [ "demo-ci, main, master" ]
+    branches: [ demo-ci, main, master ]
 
 jobs:
   build-and-test:
