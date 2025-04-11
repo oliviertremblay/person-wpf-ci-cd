@@ -1,0 +1,30 @@
+name: Intégration en continu de PersonWPF
+
+on:
+  push:
+    branches: [ "demo-ci, main, master" ]
+  pull_request:
+    branches: [ "demo-ci, main, master" ]
+
+jobs:
+  build-and-test:
+    name: Run .NET Tests
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore person-wpf-demo.sln
+
+    - name: Build solution
+      run: dotnet build person-wpf-demo.sln --no-restore --configuration Release
+
+    - name: Run tests
+      run: dotnet test PersonTests\PersonTests.csproj --verbosity normal
