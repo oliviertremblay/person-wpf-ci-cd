@@ -1,4 +1,4 @@
-name: CD - Publish and Release
+name: Déploiement en continu
 
 on:
   push:
@@ -20,12 +20,12 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Publish WPF app
-      run: |
-        dotnet publish person-wpf-demo/person-wpf-demo.csproj \
-          --configuration Release \
-          --runtime win-x64 \
-          --self-contained true \
-          --output publish
+      run: >
+        dotnet publish person-wpf-demo/person-wpf-demo.csproj
+        --configuration Release
+        --runtime win-x64
+        --self-contained true
+        --output publish
 
     - name: Create ZIP archive
       run: Compress-Archive -Path publish/* -DestinationPath person-wpf-demo.zip
