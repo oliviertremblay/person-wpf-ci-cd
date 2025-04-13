@@ -1,0 +1,40 @@
+name: CD - Publish and Release
+
+on:
+  push:
+    branches: [ main, master ]
+    tags:
+      - 'TP3-V*'
+
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Publish WPF app
+      run: |
+        dotnet publish person-wpf-demo/person-wpf-demo.csproj \
+          --configuration Release \
+          --runtime win-x64 \
+          --self-contained true \
+          --output publish
+
+    - name: Create ZIP archive
+      run: Compress-Archive -Path publish/* -DestinationPath person-wpf-demo.zip
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        name: Release ${{ github.ref_name }}
+        tag_name: ${{ github.ref_name }}
+        files: person-wpf-demo.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
