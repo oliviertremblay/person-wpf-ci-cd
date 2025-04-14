@@ -2,13 +2,24 @@ name: Déploiement en continu
 
 on:
     push:
-      branches: [ main, master ]
       tags:
-      - 'TP3-V*'
+      - 'PersonApp-V*'
 
 jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet restore person-wpf-demo.sln
+      - run: dotnet build person-wpf-demo.sln --no-restore --configuration Release
+      - run: dotnet test PersonTests/PersonTests.csproj --verbosity normal
+
   publish:
     runs-on: windows-latest
+    needs: test #Revalide que les tests passent pour déployer
 
     steps:
     - name: Checkout code
