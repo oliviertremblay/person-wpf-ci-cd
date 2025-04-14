@@ -2,9 +2,8 @@ name: Déploiement en continu
 
 on:
     push:
-      branches: [ main, master ]
       tags:
-      - 'TP3-V*'
+      - 'PersonApp-V*'
 
 jobs:
   publish:
