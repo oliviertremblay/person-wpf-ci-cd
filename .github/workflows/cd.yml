@@ -37,6 +37,6 @@ jobs:
       with:
         name: Release ${{ github.ref_name }}
         tag_name: ${{ github.ref_name }}
-        files: setup.exe
+        files: installer/setup.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
