@@ -36,4 +36,4 @@ jobs:
         tag_name: ${{ github.ref_name }}
         files: person-wpf-demo.zip
       env:
-        GITHUB_TOKEN: ${{ secrets.CD_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
