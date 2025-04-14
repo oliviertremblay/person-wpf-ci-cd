@@ -8,7 +8,7 @@ Compression=lzma
 SolidCompression=yes
 
 [Files]
-Source: "publish\*"; DestDir: "{app}"; Flags: recursesubdirs
+Source: "..\publish\*"; DestDir: "{app}"; Flags: recursesubdirs
 
 [Icons]
 Name: "{group}\person-wpf-demo"; Filename: "{app}\person-wpf-demo.exe"
