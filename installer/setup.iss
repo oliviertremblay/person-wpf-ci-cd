@@ -4,6 +4,7 @@ AppVersion=1.0.0
 DefaultDirName={pf}\person-wpf-demo
 DefaultGroupName=person-wpf-demo
 OutputBaseFilename=setup
+OutputDir=.
 Compression=lzma
 SolidCompression=yes
 
