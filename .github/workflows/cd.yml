@@ -27,14 +27,15 @@ jobs:
         --self-contained true
         --output publish
 
-    - name: Create ZIP archive
-      run: Compress-Archive -Path publish/* -DestinationPath person-wpf-demo.zip
+    - name: Generate installer with Inno Setup
+      run: |
+        "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
         name: Release ${{ github.ref_name }}
         tag_name: ${{ github.ref_name }}
-        files: person-wpf-demo.zip
+        files: setup.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
